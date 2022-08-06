@@ -1,0 +1,107 @@
+
+@charset "UTF-8";
+
+.demo-slider {
+  width:90%;
+  margin: auto;
+}
+
+.slide-item img {
+  width: 100%;
+  height: 350px;
+}
+
+.slick-prev{
+  left:50px;
+  z-index: 10;
+}
+.slick-next {
+  right: 50px;
+}
+.slick-dots{
+  bottom: 40px;
+}
+
+.main-card{
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapper{
+    /* border: solid 5px yellow; */
+    width:100%;
+    padding-top: 5px;
+    text-align:center;
+}
+h2{
+    margin-top: 10px;
+    color:#fff;
+    padding: 10px;
+}
+
+/* 슬라이드 부분 */
+.carousel{
+    width:90%;
+    margin:0px auto;
+    /* border: solid 5px red; */
+}
+.slick-slide{
+margin:30px;
+overflow: hidden;
+/* border: solid 3px #00EDA3; */
+}
+
+.slide{
+    height: 250px;
+    /* border: solid 2px rgb(255, 0, 0); */
+    border-radius: 20px;
+    position: relative;
+    background-color: black;
+    z-index: -2;
+}
+
+.slideImg img{
+    /* border-radius: 20px; */
+    position:absolute;
+    max-width:100%; 
+    max-height:100%;
+    width:auto; 
+    height:auto;
+    margin:auto;
+    top:0; bottom:0; left:0; right:0;
+    z-index: -1;
+} 
+
+.ex{
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background: linear-gradient(rgba(0, 0, 0, .1),rgba(0, 0, 0, .8));
+    opacity: 0;
+}
+
+.slideImg:hover .ex{
+    opacity: 1;
+}
+
+.ex .menu p{
+    margin: 0;
+    padding: 20px;
+    font-size: 0.6em;
+    text-align: start;
+}
+.ex .gocart{
+    padding: 20px;
+    font-size: 1em;
+}
+
+.ex .gocart :hover{
+    color: #00EDA3;
+}
+
+.wrapper .slick-dots li button:before {
+    font-size:20px;
+    color:white;
+}

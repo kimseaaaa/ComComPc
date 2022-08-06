@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="kr.mr.mapper.ClientMapper">
+ 
+ 	<!-- 전체 리스트  -->
+ 	<select id="clgetList" resultType="ClientDTO">
+ 		select * from client
+ 	</select>
+ 	
+ 	<!-- 등록  -->
+ 	<insert id="clinsert" parameterType="ClientDTO">
+	 	insert into client(id, pw, tel, birth)
+	 	values(#{id}, #{pw}, #{tel}, #{birth})
+ 	</insert>
+ 	
+ 	<!-- 삭제  -->
+ 	<delete id="cldelete" parameterType="String">
+ 		delete from client where id=#{id}
+ 	</delete>
+ 	
+ 	<!-- 수정 --> 
+    <update id="clupdate" parameterType="ClientDTO">
+      update client set pw=#{pw},tel=#{tel},birth=#{birth},memo=#{memo} where id=#{id}
+   </update>
+	
+	<!-- 해당 아이디의 고객 가져오기 -->
+	<select id="getclient" parameterType="String" resultType="ClientDTO">
+		select * from client where id=#{id}
+	</select>
+	
+	<!-- 마이페이지 수정 --> 
+ 	<update id="myupdate" parameterType="ClientDTO">
+		update client set pw=#{confpw},tel=#{tel} where id=#{id}
+	</update>
+	
+	<!-- 검색 -->
+	<select id="clsearch" parameterType="String" resultType="ClientDTO">
+       select * from client where id like concat('%',#{keyword},'%')
+    </select>
+    
+    <!-- 비밀번호 초기화 -->
+    <update id="clreset" parameterType="ClientDTO">
+		update client set pw='1234' where id=#{id}
+	</update>
+	
+	 <!-- 로그인 -->
+	<select id="clientLogin" parameterType="ClientDTO" resultType="ClientDTO">
+ 		select * from client where id=#{id} and pw =#{pw}
+ 	</select>
+ </mapper>

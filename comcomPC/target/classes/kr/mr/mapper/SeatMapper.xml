@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="kr.mr.mapper.SeatMapper">
+ 
+ 	<!-- 전체 리스트  -->
+ 	<select id="getseatList" resultType="SeatDTO">
+ 		select * from seat
+ 	</select>
+ 	
+	<!-- 고장 여부 변경 --> 
+	<update id="seatfix" parameterType="SeatDTO">
+		update seat 
+		set sfix=1
+		where seatnum=#{seatnum}
+	</update>
+	<update id="seatfixOk" parameterType="SeatDTO">
+		update seat 
+		set sfix=0
+		where seatnum=#{seatnum}
+	</update>
+	<!-- 점유 아이디 변경 --> 
+	<update id="seatupdate" parameterType="SeatDTO">
+		update seat 
+		set sid=#{sid}
+		where seatnum=#{seatnum}	
+	</update>
+	
+	<!-- 해당 좌석번호의 정보 가져오기 -->
+	<select id="getseatInfo" parameterType="Integer" resultType="SeatDTO">
+		select * from seat where seatnum=#{seatnum}
+	</select>
+ </mapper>

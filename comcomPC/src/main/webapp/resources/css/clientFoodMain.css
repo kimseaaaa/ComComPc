@@ -1,0 +1,432 @@
+@charset "UTF-8";
+/* html {
+    height: 100%;
+} */
+
+/* *
+{ cursor: default; } */
+
+ a{
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+/* 
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: linear-gradient(#141e30, #243b55);
+} */
+
+.main-container {
+    position: relative;
+}
+
+.FoodMain {
+    position: absolute;
+    /* padding: 30px; */
+    width: 95%;
+    height: 90%;
+    /* background: rgba(0, 0, 0, .5); */
+    box-sizing: border-box;
+    /* box-shadow: 0 15px 25px rgba(0, 0, 0, .6); */
+    /* border-radius: 10px;
+    margin-left: -50px;
+    margin-right: -50px; */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    /* background: #ddd; */
+    background-color: rgba(225, 225, 225, 0.1);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(225, 225, 225, 0.3);
+}
+
+/* 상단 해당 아이디로 이동하는 nav */
+/* .nav{
+    display: flex;
+    color: white;
+    justify-content: center;
+    padding: 40px;
+} */
+
+/* .hashtag{
+    background-color:rgba(255,255,255,0.2);
+    border-radius: 50%;
+    margin: 0px 30px;
+    padding: 10px 20px ;
+    font-size: 1.3em;
+}
+
+.hashtag:hover a{
+    color: #00EDA3;
+} */
+
+/* 각 메뉴로 가는 버튼 */
+.moveBtn{
+    width: 4rem;
+    bottom: 4rem;
+    right: 23.5rem;
+    background: #000;
+    position: fixed;
+    border-radius: 2rem;
+    z-index: 99;
+
+}
+.moveToBtn {
+    /* background: #000; */
+    display: flex;
+    height: 4rem;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: .2s;
+    color: #fff;
+ 
+}
+.moveToBtn a{
+    padding: 10px;
+    font-size: 1em;
+    font-weight: bold;
+}
+.moveToBtn:hover {
+    /* color: #000;
+    background: #febf00; */
+    background:#00EDA3;
+}
+
+.moveToBtn:hover a{
+    color: #141e30;
+}
+
+/* BestMenu 감싸는 부분*/
+.wrapper{
+    /* border: solid 5px yellow; */
+    width:100%;
+    padding-top: 5px;
+    text-align:center;
+}
+
+.BestMenu h2{
+    margin: 0;
+    color:#fff;
+    padding: 10px;
+}
+
+/* 슬라이드 부분 */
+.carousel{
+    width:90%;
+    margin:0px auto;
+    /* border: solid 5px red; */
+}
+
+.slick-slide{
+margin:30px;
+overflow: hidden;
+/* border: solid 3px #00EDA3; */
+}
+
+.slide{
+    height: 250px;
+    /* border: solid 2px rgb(255, 0, 0); */
+    border-radius: 20px;
+    position: relative;
+    background-color: black;
+    z-index: -2;
+}
+
+.slideImg img{
+    position:absolute;
+    magin:auto;
+    top:0; bottom:0; left:0; right:0;
+    z-index: -1;
+} 
+
+.ex{
+	/* border: 5px solid yellow; */
+    max-width:100%; 
+    width:auto; 
+    height: 250px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background: linear-gradient(rgba(0, 0, 0, .1),rgba(0, 0, 0, .8));
+    opacity: 0;
+}
+
+.slideImg:hover .ex{
+    opacity: 1;
+}
+
+.ex .menuInfo {
+	/* border: 2px solid red; */
+	flex:2;
+    margin: 0;
+    padding: 0.7em;
+    text-align: start;
+    font-size: 0.7em;
+    text-overflow:ellipsis;
+	overflow:hidden; 
+	white-space:nowrap;
+}
+
+.ex .go-cart{
+	/* border: 2px solid yellow; */
+	flex:0.5;
+    margin: 0;
+    padding: 0.5em;
+    text-align: start;
+    font-size: 1.1em;
+}
+
+.ex .go-cart :hover{
+    color: #00EDA3;
+}
+
+.wrapper .slick-dots li button:before {
+    font-size:20px;
+    color:white;
+}
+
+
+/* 메뉴부분 */
+
+.main-menu{
+    padding: 20px;
+    /* border: #00EDA3 solid 2px; */
+    margin-top: 80px;
+    width:90%;
+    margin:0px auto;
+    text-align: center;
+}
+
+.main-menu h2{
+    color: white;
+    margin: 0;
+    padding: 40px;
+}
+
+/* 음료메뉴 */
+
+.menu-list {
+    margin-bottom: 50px;
+}
+
+
+.menu-list ul{
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.menu-card{
+    width: 200px;
+    height: 250px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.menu-card .line{
+    width: 200px;
+    height: 5px;
+    /* background-color: rgb(225,221,64); */
+    background-color: black;
+}
+
+.menu-card:hover{
+    transform: translateY(-4px);
+}
+
+.menu-img{
+    /* border: red solid 1px;  */
+    width: 200px;
+    height: 180px;
+    line-height: 180px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-img img{
+    width: 200px;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 10px 10px 0px 0px ;
+} 
+
+.menu-ex{
+	/*border: yellow solid 5px; */
+    /* align-items: flex-end; */
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    align-items: center;
+    height: 70px;
+    border-radius: 0px 0px 10px 10px ;
+    
+}
+
+.menu-ex .menuInfo{
+    /* border: red solid 1px; */
+    padding-left: 10px;
+    font-size: 0.9em;
+    font-weight: bold;
+    flex:0.8;
+    overflow:hidden; 
+}
+
+.menuInfo div{
+	/* border: red solid 1px; */
+	text-overflow:ellipsis;
+	overflow:hidden; 
+	white-space:nowrap;
+	text-align: start;
+} 
+
+.menu-ex .go-cart{
+	/* border: red solid 1px; */
+    padding: 0px;
+    font-size: 1.2em;
+    flex:0.2;
+}
+.menu-ex .go-cart a{
+    color: black;
+}
+
+.menu-ex .go-cart a:hover {
+    color: #00EDA3;
+}
+
+
+/* 음식주문 */
+.cartline{
+    width: 90%;
+    background-color: white;
+    height: 2px;
+    color: white;
+    margin: auto;
+    margin-bottom: 30px;
+
+}
+
+/* 음식주문 cartlist */
+.cart-list{
+    /* border: 3px solid rgb(255, 255, 255); */
+    width: 60%;
+    margin:0px auto;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.cart-list h2{
+    margin: 0;
+    padding: 15px;
+}
+
+.request{
+    /* border: 2px solid rgb(255, 255, 255); */
+    display: flex;
+}
+.orderbox{
+    /* border: 1px solid rgb(255, 255, 255); */
+    border-radius: 15px;
+    flex: 1;
+}
+
+/* 주문메뉴 전체 리스트 */
+.orderlist{
+    padding: 20px;
+}
+
+/* 메뉴 리스트 */
+.orderbox .list{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.list:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.ordermenu{
+    display: flex;
+}
+
+.totalbox{
+    /* border: 2px solid rgb(255, 255, 255); */
+    flex: 0.5;
+    margin: auto;
+}
+
+.side-btn{
+    /* border: 2px solid red; */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.totalMoney{
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    margin-bottom: 20px;
+    line-height: 20px;
+    align-items: flex-end;
+}
+
+.totalMoney .Money{
+    font-weight: bold;
+}
+
+.payMoney{
+	height: 40px;
+}
+
+
+.btnPay{
+    margin-right: 20%;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    width: 40%;
+    line-height: 25px;
+    background: none;
+    font-size: 1em;
+    margin: 0;
+    padding: 0.2em;
+}
+
+.btnPay:hover{
+    color: #00EDA3;
+    border: solid 1px #00EDA3;
+    font-weight: bolder;
+}
+
+
+

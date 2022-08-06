@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="kr.mr.mapper.GameRankMapper">
+ 
+ 	<!-- 전체 리스트  -->
+ 	<select id="getgamerankList" resultType="GameRankDTO">
+ 		select * from gamerank
+ 	</select>
+ 	
+ 	<!-- 등록  -->
+ 	<insert id="gamerankinsert" parameterType="GameRankDTO">
+	 	insert into gamerank(ranking, grstat, grgap, grname, grcomp, grshare, grupdate)
+	 	values(#{ranking}, #{grstat}, #{grgap}, #{grname}, #{grcomp}, #{grshare}, NOW())
+ 	</insert>
+ 	
+ 	<!-- 전체 삭제 -->
+ 	<delete id="gamerankdelete">
+ 		Truncate gamerank
+ 	</delete> 
+ 	
+ </mapper>
