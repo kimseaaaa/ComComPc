@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: ￬ﾄﾸ￬ﾕﾄ
+Built-By: Park Hyosook
 Build-Jdk: 11.0.15.1
 Created-By: Maven Integration for Eclipse
 
