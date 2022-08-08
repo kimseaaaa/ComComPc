@@ -65,4 +65,10 @@ public class ClientServiceImpl implements ClientService{
 		return mapper.clientLogin(cldto);
 	}
 	
+	// 좌석 번호 임으로 넣어줌 추후 삭제 필요
+	@Override
+	public int seat72(ClientDTO cldto) {
+		return mapper.seat72(cldto);
+	}
+	
 }

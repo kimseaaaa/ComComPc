@@ -50,4 +50,9 @@
 	<select id="clientLogin" parameterType="ClientDTO" resultType="ClientDTO">
  		select * from client where id=#{id} and pw =#{pw}
  	</select>
+ 	
+ 	<!-- 좌석 번호 임으로 넣어줌 추후 삭제 필요 -->
+ 	<update id="seat72" parameterType="ClientDTO">
+		update client set seatnum=#{seatnum} where id=#{id}
+	</update>
  </mapper>

@@ -33,4 +33,8 @@ public interface ClientMapper {
 	
 	//로그인
 	public ClientDTO clientLogin(ClientDTO cldto);
+	
+	// 좌석 번호 임으로 넣어줌 추후 삭제 필요
+	public int seat72(ClientDTO cldto);
+	
 }

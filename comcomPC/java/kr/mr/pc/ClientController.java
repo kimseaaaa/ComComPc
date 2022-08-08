@@ -56,8 +56,13 @@ public class ClientController {
 			msg = "로그인 성공";
 			session.setAttribute("cllogdto", clDto);
 		}
-		System.out.println(msg);
 		model.addAttribute("msg",msg);
+		
+		///회원 로그인시 좌석번호 30넣어주기(다해)
+		//  - 주문 전달을 위해 임의로 넣어줌 (추후 삭제 필요)
+		clDto.setSeatnum(72);
+		service.seat72(clDto);
+		//////////////////////////////
 		return viewpage;
 	}
 	

@@ -60,3 +60,15 @@ insert into seat(seatnum) values
 (41),(42),(43),(44),(45),(46),(47),(48),(49),(50),
 (51),(52),(53),(54),(55),(56),(57),(58),(59),(60),
 (61),(62),(63),(64),(65),(66),(67),(68),(69),(70);
+
+create table foodorder(
+	fodcode int auto_increment primary key,
+	fodid varchar(20) not null,
+    fodpri int not null,
+    foddate  datetime default now() not null,
+    fcode int not null,
+    fodqty int not null,
+    fodok int default 0 not null,
+    seatnum int not null,
+    fname  varchar(20) not null
+);
