@@ -72,3 +72,11 @@ create table foodorder(
     seatnum int not null,
     fname  varchar(20) not null
 );
+
+create table clientvisit(
+	cvcode Int auto_increment primary key,
+	cvid Varchar(20) not null,
+	seatnum int not null,
+	cvlogin datetime default now() not null,
+	cvlogout datetime
+);

@@ -5,13 +5,17 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
 <!-- clientSide -->
-<%@ include file="../inc/clientSideA.jsp" %>
+<%@ include file="../../inc/clientSideA.jsp" %>
 
 <script src="${ctx}/js/clientFoodMain.js"></script>
 
 <script type="text/javascript">
-///주문정보!
-
+$(document).ready(function(){
+	if(${msg != null}){
+		alert("${msg}");
+	}	  
+	<c:remove var="msg" scope="session"/>
+});
 </script>
 
 
@@ -225,7 +229,7 @@
                         <div class="Money"> ${totpri} 원</div>
                     </div>
                     <div class="side-btn payMoney">
-                        <input value="결제하기" class="btnPay"/>
+                        <a href="clientFoodPay.do" class="btnPay">결제하기</a>
                     </div>
                 </div>
             </div>
@@ -235,6 +239,6 @@
 
     
 <!-- clientSide 밑부분 -->
-<%@ include file="../inc/clientSideB.jsp" %>
+<%@ include file="../../inc/clientSideB.jsp" %>
     
   	                            

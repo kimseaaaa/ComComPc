@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="kr.mr.mapper.FoodOrderMapper">
+ 	
+ 	<!-- 음식 주문추가 -->
+	<insert id="cartInsert" parameterType="FoodOrderDTO">
+		insert into foodorder(fodid,fodpri,fcode,fodqty,seatnum,fname)
+		values(#{fodid},#{fodpri},#{fcode},#{fodqty},#{seatnum},#{fname})
+	</insert>
+	
+	<!-- 처리안된 음식 주문가져오기-->
+	<select id="folist" resultType="FoodOrderDTO">
+		select * from foodorder where fodok=0 order by foddate asc
+	</select>
+	
+	<!-- 처리안된 음식 주문수 가져오기-->
+	<select id="folistsize" resultType="Integer">
+		select count(*) from foodorder where fodok=0 order by foddate asc
+	</select>
+	
+	<!--주문 전달완료처리-->
+	<update id="orderOk" parameterType="Integer">
+		update foodorder
+		set fodok=1
+		where fodcode=#{fodcode}
+	</update>
+	
+	<!-- 처리된 음식 주문가져오기-->
+	<select id="endfolist" resultType="FoodOrderDTO">
+		select * from foodorder where fodok=1 order by foddate desc
+	</select>
+	
+	<!--좌석번호로 검색--> 
+	<select id="seatnumSFOList" parameterType="Integer" resultType="FoodOrderDTO">
+		select * from foodorder where seatnum=#{seatnum} order by foddate desc
+	</select>
+	
+	<!--아이디로 검색--> 
+	<select id="idSFOList" parameterType="String" resultType="FoodOrderDTO">
+		select * from foodorder where fodid=#{fodid} order by foddate desc
+	</select>
+ </mapper>
+ 
+ 
+ 
+ 

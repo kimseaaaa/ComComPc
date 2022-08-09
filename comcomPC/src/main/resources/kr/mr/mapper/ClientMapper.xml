@@ -55,4 +55,10 @@
  	<update id="seat72" parameterType="ClientDTO">
 		update client set seatnum=#{seatnum} where id=#{id}
 	</update>
+	
+	<!-- 총 음식금액수정 -->
+	<update id="clFPUpdate" parameterType="ClientDTO">
+		update client set totfood=#{totfood}, totpri=#{totpri} where id=#{id}
+	</update>
+	
  </mapper>

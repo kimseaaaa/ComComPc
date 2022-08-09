@@ -221,14 +221,17 @@ public class FoodController {
 	
 	//메뉴 메인 페이지 리스트
 		@RequestMapping("/clientFoodMain.do")
-		public String adminSeat(Model model) {
+		public String FoodMain(Model model,RedirectAttributes redirect,String msg) {
 			List<FoodDTO> list = service.FoodList();
 			model.addAttribute("MenuList",list);
 			Map<Integer,FoodOrderDTO> focart=foservice.getfocart();
 			if(focart!=null) {
 				model.addAttribute("focart",focart);
 			}
-			return "client/clientFoodMain";
+			
+			model.addAttribute("msg", msg);
+			
+			return "client/food/clientFoodMain";
 		}
 
 }

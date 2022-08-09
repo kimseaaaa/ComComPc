@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.mr.model.AdminDTO;
+import kr.mr.model.FoodOrderDTO;
 import kr.mr.service.AdminService;
 import kr.mr.service.CrawlService;
+import kr.mr.service.FoodOrderService;
 
 @Controller
 public class AdminController {
@@ -23,6 +25,9 @@ public class AdminController {
 	
 	@Autowired
 	private CrawlService crawlservice;
+	
+	@Autowired
+	private FoodOrderService foservice;
 
 	@RequestMapping("/adminSetting.do")
 	public String adminSetting() {
@@ -34,12 +39,15 @@ public class AdminController {
 		///////////크롤링/////////
 		List<List> gamelist = crawlservice.crawlList();
 		
-		System.out.println("gamelist : "+gamelist);
-		
 		model.addAttribute("gamenew", gamelist.get(0));
 		model.addAttribute("gamerank", gamelist.get(1));
 		////////////////////////
 		
+		///////음식주문////////////
+		List<FoodOrderDTO> folist = foservice.folist();
+		model.addAttribute("folist",folist);
+//		foodorder(model);
+		//////////////////////////////
 		
 		return "admin/adminDashboard";
 	}
@@ -71,6 +79,14 @@ public class AdminController {
 	public String adminLogout(HttpSession session) {
 		session.invalidate();
 		return "admin/adminLogin";
+	}
+	
+	
+	
+	public void foodorder(Model model) {
+		int focnt = foservice.folist().size();
+		model.addAttribute("focnt",focnt);
+		
 	}
 	
 

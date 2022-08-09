@@ -16,12 +16,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.mr.model.AdminDTO;
 import kr.mr.model.ClientDTO;
+import kr.mr.model.ClientVisitDTO;
 import kr.mr.service.ClientService;
+import kr.mr.service.ClientVisitService;
 
 @Controller
 public class ClientController {
 	@Autowired
 	private ClientService service;
+	
+	@Autowired
+	private ClientVisitService cvservice;
 
 	
 	// 회원전체리스트
@@ -54,15 +59,23 @@ public class ClientController {
 		}else {
 			viewpage = "client/charge/clientFront";
 			msg = "로그인 성공";
+			
+			//로그인 시점 저장
+			ClientVisitDTO cvdto = new ClientVisitDTO(); 
+			cvdto.setCvid(clDto.getId());
+			cvdto.setSeatnum(clDto.getSeatnum());
+			cvservice.loginPoint(cvdto);
+			
+			///회원 로그인시 좌석번호 72넣어주기(다해)
+			//  - 주문 전달을 위해 임의로 넣어줌 (추후 삭제 필요)
+			clDto.setSeatnum(30);
+			service.seat72(clDto);
+			//////////////////////////////
+			
 			session.setAttribute("cllogdto", clDto);
 		}
 		model.addAttribute("msg",msg);
 		
-		///회원 로그인시 좌석번호 30넣어주기(다해)
-		//  - 주문 전달을 위해 임의로 넣어줌 (추후 삭제 필요)
-		clDto.setSeatnum(72);
-		service.seat72(clDto);
-		//////////////////////////////
 		return viewpage;
 	}
 	
@@ -183,6 +196,12 @@ public class ClientController {
    
 	@RequestMapping("/clientLogout.do")
 	public String clientLogout(HttpSession session) {
+		ClientDTO cldto = (ClientDTO)session.getAttribute("cllogdto");
+		
+		
+		//로그아웃시점 저장
+		cvservice.logoutPoint(cldto.getId());
+		
 		
 		session.invalidate();
 		return "client/info/clientLogin";

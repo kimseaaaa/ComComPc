@@ -1,12 +1,16 @@
 package kr.mr.service;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.mr.mapper.ClientMapper;
 import kr.mr.mapper.FoodMapper;
+import kr.mr.mapper.FoodOrderMapper;
 import kr.mr.model.ClientDTO;
 import kr.mr.model.FoodDTO;
 import kr.mr.model.FoodOrderDTO;
@@ -16,6 +20,12 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 	
 	@Autowired
 	private FoodMapper fmapper;
+	
+	@Autowired
+	private FoodOrderMapper fomapper;
+	
+	@Autowired
+	private ClientMapper cmapper;
 	
 	// Map<음식코드,음식주문DTO>:db저장전 음식 주문 받기
 	private Map<Integer,FoodOrderDTO > focart; 
@@ -86,7 +96,50 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		}else {
 			cartdelete(fcode);
 		}
-		
+	}
+	
+	//cart db 저장
+	@Override
+	public void cartInsert(ClientDTO cldto) {
+		Collection<FoodOrderDTO> fodtolist = focart.values();
+		int totfood=cldto.getTotfood();
+		for(FoodOrderDTO fodto : fodtolist) {
+			totfood+= fodto.getFodpri();
+			fomapper.cartInsert(fodto);
+		}
+		cldto.setTotfood(totfood);
+		cldto.setTotpri(totfood+cldto.getTotpri());
+		cmapper.clFPUpdate(cldto);
+	}
+	
+	//처리가 안된 리스트 가져오기
+	@Override
+	public List<FoodOrderDTO> folist() {
+		return fomapper.folist();
+	}
+	
+	//주문 전달완료처리
+	@Override
+	public int orderOk(int fodcode) {
+		return fomapper.orderOk(fodcode);
+	}
+	
+	//처리된 리스트 가져오기
+	@Override
+	public List<FoodOrderDTO> endfolist() {
+		return fomapper.endfolist();
+	}
+	
+	//좌석번호로 검색
+	@Override
+	public List<FoodOrderDTO> seatnumSFOList(int seatnum) {
+		return fomapper.seatnumSFOList(seatnum);
+	}
+	
+	//아이디로 검색
+	@Override
+	public List<FoodOrderDTO> idSFOList(String fodid) {
+		return fomapper.idSFOList(fodid);
 	}
 
 }

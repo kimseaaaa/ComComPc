@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="kr.mr.mapper.ClientVisitMapper">
+ 	<!-- 로그인시점 저장 -->
+ 	<insert id="loginPoint" parameterType="ClientVisitDTO">
+ 		insert into clientvisit(cvid, seatnum)
+	 	values(#{cvid}, #{seatnum})
+ 	</insert>
+ 	
+ 	<!-- 로그아웃시점 저장 -->
+ 	<update id="logoutPoint" parameterType="String">
+ 		update clientvisit 
+		set cvlogout=NOW()
+		where cvid=#{cvid} and cvlogout=null
+ 	</update>
+ 
+ 
+ </mapper>
