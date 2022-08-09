@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
@@ -39,12 +41,22 @@
         </tr>
       </thead>
       <tbody>
-      
+        <%
+        SimpleDateFormat yyyy = new SimpleDateFormat("yyyy");         
+    	SimpleDateFormat MM = new SimpleDateFormat("MM");         
+    	SimpleDateFormat dd = new SimpleDateFormat("dd");         
+    	Date now = new Date();        
+    	String nowday = yyyy.format(now.getTime())+"-"+ MM.format(now.getTime())+"-"+ dd.format(now.getTime()) +" 00:00:00";
+    	
+   		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date now0 = sdf.parse(nowday);
+      %>
+      <c:set var="yesterday" value="<%=now0%>" />
       <c:forEach var="fodto" items="${folist}">
         <tr>
           <td>${fodto.fodid}</td>
           <td>${fodto.seatnum}</td>
-          <td><fmt:formatDate value="${fodto.foddate}" pattern="yyyy-MM-dd HH:mm"/></td>
+          <td><fmt:formatDate value="${fodto.foddate}" pattern="${fodto.foddate>=yesterday ? 'HH:mm' : 'yyyy-MM-dd'}"/></td>
           <td>${fodto.fname}</td>
           <td>${fodto.fodqty}</td>
           <td class="delmodbtn">
@@ -57,7 +69,7 @@
 		       <tr>
 		         <td>${fodto.fodid}</td>
 		         <td>${fodto.seatnum}</td>
-		         <td><fmt:formatDate value="${fodto.foddate}" pattern="yyyy-MM-dd"/></td>
+		         <td><fmt:formatDate value="${fodto.foddate}" pattern="${fodto.foddate>=yesterday ? 'HH:mm' : 'yyyy-MM-dd'}"/></td>
 		         <td>${fodto.fname}</td>
 		         <td>${fodto.fodqty}</td>
 		         <td class="delmodbtn">완료 </td>

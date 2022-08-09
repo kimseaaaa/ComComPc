@@ -35,12 +35,12 @@
 	
 	<!--좌석번호로 검색--> 
 	<select id="seatnumSFOList" parameterType="Integer" resultType="FoodOrderDTO">
-		select * from foodorder where seatnum=#{seatnum} order by foddate desc
+		select * from foodorder where seatnum like concat('%',#{seatnum},'%') order by foddate desc
 	</select>
 	
 	<!--아이디로 검색--> 
 	<select id="idSFOList" parameterType="String" resultType="FoodOrderDTO">
-		select * from foodorder where fodid=#{fodid} order by foddate desc
+		select * from foodorder where fodid like concat('%',#{fodid},'%') order by foddate desc
 	</select>
  </mapper>
  
