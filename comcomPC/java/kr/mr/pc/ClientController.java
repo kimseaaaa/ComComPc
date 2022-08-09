@@ -196,12 +196,14 @@ public class ClientController {
    
 	@RequestMapping("/clientLogout.do")
 	public String clientLogout(HttpSession session) {
-		ClientDTO cldto = (ClientDTO)session.getAttribute("cllogdto");
-		
 		
 		//로그아웃시점 저장
-		cvservice.logoutPoint(cldto.getId());
+		ClientDTO cldto = (ClientDTO)session.getAttribute("cllogdto");
+		String cvcode = cvservice.logoutnullcode(cldto.getId());
 		
+		System.out.println("cvcode : "+cvcode);
+		
+		cvservice.logoutPoint(cvcode);
 		
 		session.invalidate();
 		return "client/info/clientLogin";

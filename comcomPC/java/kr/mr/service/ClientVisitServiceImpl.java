@@ -1,10 +1,12 @@
 package kr.mr.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import kr.mr.mapper.ClientVisitMapper;
 import kr.mr.model.ClientVisitDTO;
 
+@Service
 public class ClientVisitServiceImpl implements ClientVisitService{
 	
 	@Autowired
@@ -17,10 +19,16 @@ public class ClientVisitServiceImpl implements ClientVisitService{
 		return mapper.loginPoint(cvdto);
 	}
 	
+	//로그아웃이안된 코드 가져오기
+	@Override
+	public String logoutnullcode(String cvid) {
+		return mapper.logoutnullcode(cvid);
+	}
+	
 	//로그아웃시점 저장
 	@Override
-	public int logoutPoint(String cvid) {
-		return  mapper.logoutPoint(cvid);
+	public int logoutPoint(String cvcode) {
+		return  mapper.logoutPoint(cvcode);
 	}
 	
 

@@ -10,11 +10,16 @@
 	 	values(#{cvid}, #{seatnum})
  	</insert>
  	
+ 	<!-- 로그아웃이안된 코드 가져오기 -->
+ 	<select id="logoutnullcode" parameterType="String" resultType="String">
+ 		select cvcode from clientvisit where cvid=#{cvid} and cvlogout is null
+ 	</select>
+ 	
  	<!-- 로그아웃시점 저장 -->
  	<update id="logoutPoint" parameterType="String">
  		update clientvisit 
 		set cvlogout=NOW()
-		where cvid=#{cvid} and cvlogout=null
+		where cvcode=#{cvcode}
  	</update>
  
  
