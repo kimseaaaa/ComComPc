@@ -44,10 +44,11 @@
         <%
         SimpleDateFormat yyyy = new SimpleDateFormat("yyyy");         
     	SimpleDateFormat MM = new SimpleDateFormat("MM");         
-    	SimpleDateFormat dd = new SimpleDateFormat("dd");         
+    	SimpleDateFormat dd = new SimpleDateFormat("dd");   
+    	SimpleDateFormat HH = new SimpleDateFormat("hh");
+    	SimpleDateFormat mm = new SimpleDateFormat("mm");
     	Date now = new Date();        
     	String nowday = yyyy.format(now.getTime())+"-"+ MM.format(now.getTime())+"-"+ dd.format(now.getTime()) +" 00:00:00";
-    	
    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date now0 = sdf.parse(nowday);
       %>

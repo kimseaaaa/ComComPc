@@ -68,8 +68,19 @@
 		      }
 		  });
 		
+		$.ajax({
+		      url: "<c:url value='/ajaxFoodOrderCnt.do'/>",
+		      type: "GET",
+		      success:function (data) {
+		    	  $(".foodorder").text(data);
+		      },
+		      error: function () {
+		         alert("에러!!!!!!!!!");
+		      }
+		  });
+		
 	});
-   	setTimeout(function(){
+   setInterval(function(){
 	   location.reload();
 	},60000);
    </script>
