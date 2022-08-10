@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.mr.model.AdminDTO;
@@ -20,7 +19,6 @@ import kr.mr.model.ClientDTO;
 import kr.mr.model.ClientVisitDTO;
 import kr.mr.service.ClientService;
 import kr.mr.service.ClientVisitService;
-import kr.mr.service.TimeOrderService;
 
 @Controller
 public class ClientController {
@@ -29,10 +27,7 @@ public class ClientController {
 	
 	@Autowired
 	private ClientVisitService cvservice;
-	
-	@Autowired
-	private TimeOrderService toservice;
-	
+
 	
 	// 회원전체리스트
 	@RequestMapping("/adminClientList.do")
@@ -58,66 +53,28 @@ public class ClientController {
 		ClientDTO clDto = service.clientLogin(cldto);
 		String viewpage = null;
 		String msg = null;
-		
 		if(clDto==null) {
 			viewpage = "client/info/clientLogin";
 			msg = "로그인 실패";
 		}else {
 			viewpage = "client/charge/clientFront";
 			msg = "로그인 성공";
-
-			session.setAttribute("cllogdto", clDto);
-			session.setAttribute("id", clDto.getId());
-			session.setAttribute("timefront",clDto.getMytime());
 			
-			model.addAttribute("timefront",service.format00(clDto.getMytime()));
-		}
-		
-		model.addAttribute("msg",msg);
-		return viewpage;
-	}
-	
-	@RequestMapping("/clientCharge.do")
-	public String clientCharge() {
-		return "client/charge/clientCharge";
-	}
-	
-	@RequestMapping("/clientPreCharge.do")
-	public String clientPreCharge() {
-		return "client/charge/clientPreCharge";
-	}
-	
-	@RequestMapping("/clientFront.do")
-	public String clientFront(Model model, HttpSession session) {
-		
-		int time = (Integer) session.getAttribute("timefront");
-		model.addAttribute("timefront",service.format00(time));
-		
-		return "client/charge/clientFront";
-	}
-	
-	
-	//컴퓨터 시작
-	@RequestMapping("/clientStart.do")
-	public String clientStart(HttpSession session) {
-		
-		ClientDTO clDto = (ClientDTO) session.getAttribute("cllogdto");
-		
-		if(cvservice.logoutnullcode(clDto.getId())==null) {
-			//남은시간 저장
-			toservice.puyMyTime(clDto.getMytime());
-			//시작하기 시점 저장
+			//로그인 시점 저장
 			ClientVisitDTO cvdto = new ClientVisitDTO(); 
 			cvdto.setCvid(clDto.getId());
 			cvdto.setSeatnum(clDto.getSeatnum());
 			cvservice.loginPoint(cvdto);
+			
+			session.setAttribute("cllogdto", clDto);
 		}
-        
-		return "client/clientMain";
+		model.addAttribute("msg",msg);
+		
+		return viewpage;
 	}
 	
 	@RequestMapping("/clientMain.do")
-	public String clientMain(HttpSession session) {
+	public String clientMain() {
 		return "client/clientMain";
 	}
 	
@@ -159,7 +116,6 @@ public class ClientController {
       
       return "admin/member/adminClientInfo";
    }
-   
 	
 	//수정
 	@RequestMapping(value="/adminClientMod.do", method=RequestMethod.POST)
@@ -183,8 +139,6 @@ public class ClientController {
 		ClientDTO cldto = (ClientDTO) session.getAttribute("cllogdto");
 		model.addAttribute("cldto", cldto);
 		
-		
-		
 		return "client/info/clientInfo";
 	}
 
@@ -200,27 +154,6 @@ public class ClientController {
 		return "redirect:/clientMain.do";
 		
 	}
-	
-	// 결제API로 보내기
-	 
-	  @RequestMapping("/clientPrePay.do") 
-	  public String clientAPI(String money, Model model) {
-		  System.out.println("충전할 돈: "+money);
-		  model.addAttribute("money", money);
-		  
-		  return "client/charge/clientPrePay"; 
-	  
-	  }
-	  // 결제API로 보내기
-	  
-	  @RequestMapping("/clientPay.do") 
-	  public String clientPay(String money, Model model) {
-		  System.out.println("충전할 돈: "+money);
-		  model.addAttribute("money", money);
-		  
-		  return "client/charge/clientPay"; 
-		  
-	  }
 	
 	// 검색
 	@RequestMapping("/adminClientSearch.do")
@@ -255,24 +188,20 @@ public class ClientController {
       return "redirect:/adminClientView.do";
    }
    
-   @RequestMapping("/clientLogout.do")
-   public String clientLogout(HttpSession session) {
-      
-      //로그아웃시점 저장
-      ClientDTO cldto = (ClientDTO)session.getAttribute("cllogdto");
-      String cvcode = cvservice.logoutnullcode(cldto.getId());
-      
-      cvservice.logoutPoint(cvcode);
-      
-      //남은 시간 저장
-      cldto.setMytime(toservice.remainingMyTime());
-      service.mytimeUpdate(cldto);
-      
-      
-      
-      session.invalidate();
-      return "client/info/clientLogin";
-   }
+	@RequestMapping("/clientLogout.do")
+	public String clientLogout(HttpSession session) {
+		
+		//로그아웃시점 저장
+		ClientDTO cldto = (ClientDTO)session.getAttribute("cllogdto");
+		String cvcode = cvservice.logoutnullcode(cldto.getId());
+		
+		System.out.println("cvcode : "+cvcode);
+		
+		cvservice.logoutPoint(cvcode);
+		
+		session.invalidate();
+		return "client/info/clientLogin";
+	}
 	
    @RequestMapping("/clientidcheck.do")
    public String clientidchek(HttpServletRequest request,HttpServletResponse response,String id, Model model) {
@@ -297,9 +226,11 @@ public class ClientController {
       }
       return null;
    }
-
-   
-  
 	   
+	
 
 }
+
+
+
+

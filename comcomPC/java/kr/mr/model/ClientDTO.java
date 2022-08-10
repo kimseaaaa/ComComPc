@@ -15,9 +15,6 @@ public class ClientDTO {
    private String keyword; //검색
    private String newpw;
    private String confpw;
-   private String todid;
-   private int todpri;
-   private String toddate;
    
    public ClientDTO() {}
    
@@ -96,30 +93,6 @@ public class ClientDTO {
 
 	public void setConfpw(String confpw) {
 		this.confpw = confpw;
-	}
-
-	public String getTodid() {
-		return todid;
-	}
-
-	public void setTodid(String todid) {
-		this.todid = todid;
-	}
-
-	public int getTodpri() {
-		return todpri;
-	}
-
-	public void setTodpri(int todpri) {
-		this.todpri = todpri;
-	}
-
-	public String getToddate() {
-		return toddate;
-	}
-
-	public void setToddate(String toddate) {
-		this.toddate = toddate;
 	}
 
 	@Override

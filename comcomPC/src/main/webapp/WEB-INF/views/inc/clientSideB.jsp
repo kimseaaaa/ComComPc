@@ -1,19 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-
 </div>
 <div class="sidebar">
   <div class="userNum">72</div>
   <div class="info">
-
-<%	
-	String id = (String)session.getAttribute("id");
-%> 
-    <div class="userName" ><p><%=id%> 님</p></div>
-  <a class="home" onclick="timezeroOk()"><i class="fa fa-home" aria-hidden="true"></i></a><br>
+    <div class="userName"><p>김세아 님</p></div>
+  <a class="home" href="#"><i class="fa fa-home" aria-hidden="true"></i></a><br>
 </div>
-<div class="time">${timefront}</div>
+<div class="time">00:59</div>
 <div class="btnbox">
   <a href="clientLogout.do" class="btn">로그아웃</a>
   <a href="clientCharge.do" class="btn">충전하기</a>
@@ -21,7 +15,7 @@
 <br>
  <div class="side-wrapper">
   <div class="side-menu">
-   <a class="sidebar-link" href="#">
+   <a class="sidebar-link" href="clientFoodMain.do">
     <svg viewBox="0 0 24 24" fill="currentColor">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M17.769 8.382H22C22 4.985 19.964 3 16.516 3H7.484C4.036 3 2 4.985 2 8.338v7.324C2 19.015 4.036 21 7.484 21h9.032C19.964 21 22 19.015 22 15.662v-.313h-4.231c-1.964 0-3.556-1.552-3.556-3.466 0-1.915 1.592-3.467 3.556-3.467v-.034zm0 1.49h3.484c.413 0 .747.326.747.728v2.531a.746.746 0 01-.747.728H17.85c-.994.013-1.864-.65-2.089-1.595a1.982 1.982 0 01.433-1.652 2.091 2.091 0 011.576-.74zm.151 2.661h.329a.755.755 0 00.764-.745.755.755 0 00-.764-.746h-.329a.766.766 0 00-.54.213.727.727 0 00-.224.524c0 .413.34.75.764.754zM6.738 8.382h5.644a.755.755 0 00.765-.746.755.755 0 00-.765-.745H6.738a.755.755 0 00-.765.737c0 .413.341.75.765.754z" />
      </svg>
@@ -43,51 +37,5 @@
 </div>
 </div>
 <script src="${ctx}/js/main.js"></script>
- <script type="text/javascript">
-
-	function timezeroOk() {
-		
-		//var time = document.getElementById("time").value;
-		var time = '${timefront}';
-		
-		//alert("[clientSideB.jsp][timezeroOk()] time : " + time);
-		
-		if(time == 0 || time == null){
-			
-			alert("잔여시간이 없습니다. 충전해 주세요.");
-			location.href = "clientCharge.do";
-		} else {
-			
-			location.href = "clientMain.do";
-		}
-	};
-	
-	$(document).ready(function(){
-		$.ajax({
-		      url: "<c:url value='/ajaxRemainingTime.do'/>",
-		      type: "GET",
-		      success:function (data) {
-		    	  $(".time").text(data);
-		      },
-		      error: function () {
-		         alert("에러!!!!!!!!!");
-		      }
-		  });
-	});
-	
-	
-	setInterval(function(){
-		$.ajax({
-		      url: "<c:url value='/ajaxRemainingTime.do'/>",
-		      type: "GET",
-		      success:function (data) {
-		    	  $(".time").text(data);
-		      },
-		      error: function () {
-		         alert("에러!!!!!!!!!");
-		      }
-		  });
-		},60000);
-</script>
 </body>
 </html>

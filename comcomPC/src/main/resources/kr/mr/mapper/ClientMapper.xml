@@ -51,16 +51,14 @@
  		select * from client where id=#{id} and pw =#{pw}
  	</select>
  	
- 	<!-- 로그아웃시 남은 시간 저장 -->
-    <update id="mytimeUpdate" parameterType="ClientDTO">
-      update client set mytime=#{mytime} where id=#{id}
-   </update>
-
- 	
- 	
+ 	<!-- 좌석 번호 임으로 넣어줌 추후 삭제 필요 -->
+ 	<update id="seat72" parameterType="ClientDTO">
+		update client set seatnum=#{seatnum} where id=#{id}
+	</update>
+	
+	<!-- 총 음식금액수정 -->
+	<update id="clFPUpdate" parameterType="ClientDTO">
+		update client set totfood=#{totfood}, totpri=#{totpri} where id=#{id}
+	</update>
+	
  </mapper>
- 
- 
- 
- 
- 

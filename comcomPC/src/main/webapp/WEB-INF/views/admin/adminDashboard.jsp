@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <%@ include file="../inc/adminSideA.jsp" %>    
+   
+
+
 
 <link rel="stylesheet" href="${ctx}/css/adminDashboard.css">
 
@@ -11,159 +14,26 @@
    <div class="request-list">
       <h3 class="request-title">주문 목록</h3>
          <ul class="list-items">
-            <li>
-               <div class="orderbox">
-                  <div class="obseatnum">
-                     <span class="seatnum">72</span>
-                     <span class="id">dahae</span>   
-                  </div>
-                  <div class="obmsg">
-                     <div class="obchat">
-                        신라면 X 2
-                     </div>
-                     <div class="obbtn">
-                        <input value="전달완료" class="btn"/>
-
-                     </div>
-                  </div>
-               </div>
-            </li>   
-            <li>
-               <div class="orderbox">
-                  <div class="obseatnum">
-                     <span class="seatnum">72</span>
-                     <span class="id">dahae</span>   
-                  </div>
-                  <div class="obmsg">
-                     <div class="obchat">
-                        신라면 X 2
-                     </div>
-                     <div class="obbtn">
-                        <input value="전달완료" class="btn"/>
-
-                     </div>
-                  </div>
-               </div>
-            </li>
-            <li>
-               <div class="orderbox">
-                  <div class="obseatnum">
-                     <span class="seatnum">72</span>
-                     <span class="id">dahae</span>   
-                  </div>
-                  <div class="obmsg">
-                     <div class="obchat">
-                        신라면 X 2
-                     </div>
-                     <div class="obbtn">
-                        <input value="전달완료" class="btn"/>
-
-                     </div>
-                  </div>
-               </div>
-            </li>
-            <li>
-               <div class="orderbox">
-                  <div class="obseatnum">
-                     <span class="seatnum">72</span>
-                     <span class="id">dahae</span>   
-                  </div>
-                  <div class="obmsg">
-                     <div class="obchat">
-                        신라면 X 2
-                     </div>
-                     <div class="obbtn">
-                        <input value="전달완료" class="btn"/>
-
-                     </div>
-                  </div>
-               </div>
-            </li>
-            <li>
-               <div class="orderbox">
-                  <div class="obseatnum">
-                     <span class="seatnum">72</span>
-                     <span class="id">dahae</span>   
-                  </div>
-                  <div class="obmsg">
-                     <div class="obchat">
-                        신라면 X 2
-                     </div>
-                     <div class="obbtn">
-                        <input value="전달완료" class="btn"/>
-
-                     </div>
-                  </div>
-               </div>
-            </li>
-            <li>
-               <div class="orderbox">
-                  <div class="obseatnum">
-                     <span class="seatnum">72</span>
-                     <span class="id">dahae</span>   
-                  </div>
-                  <div class="obmsg">
-                     <div class="obchat">
-                        신라면 X 2
-                     </div>
-                     <div class="obbtn">
-                        <input value="전달완료" class="btn"/>
-
-                     </div>
-                  </div>
-               </div>
-            </li>
-            <li>
-               <div class="orderbox">
-                  <div class="obseatnum">
-                     <span class="seatnum">72</span>
-                     <span class="id">dahae</span>   
-                  </div>
-                  <div class="obmsg">
-                     <div class="obchat">
-                        신라면 X 2
-                     </div>
-                     <div class="obbtn">
-                        <input value="전달완료" class="btn"/>
-
-                     </div>
-                  </div>
-               </div>
-            </li>
-            <li>
-               <div class="orderbox">
-                  <div class="obseatnum">
-                     <span class="seatnum">72</span>
-                     <span class="id">dahae</span>   
-                  </div>
-                  <div class="obmsg">
-                     <div class="obchat">
-                        신라면 X 2
-                     </div>
-                     <div class="obbtn">
-                        <input value="전달완료" class="btn"/>
-
-                     </div>
-                  </div>
-               </div>
-            </li>
-            <li>
-               <div class="orderbox">
-                  <div class="obseatnum">
-                     <span class="seatnum">72</span>
-                     <span class="id">dahae</span>   
-                  </div>
-                  <div class="obmsg">
-                     <div class="obchat">
-                        신라면 X 2
-                     </div>
-                     <div class="obbtn">
-                        <input value="전달완료" class="btn"/>
-
-                     </div>
-                  </div>
-               </div>
-            </li>         
+         
+	         <c:forEach var="fodto" items="${folist}">
+	            <li>
+	               <div class="orderbox">
+	                  <div class="obseatnum">
+	                     <span class="seatnum">${fodto.seatnum}</span>
+	                     <span class="id">${fodto.fodid}</span>   
+	                  </div>
+	                  <div class="obmsg">
+	                     <div class="obchat">
+	                        ${fodto.fname} X ${fodto.fodqty}
+	                     </div>
+	                     <div class="obbtn">
+	                        <a href="adminOrderOk.do?fodcode=${fodto.fodcode}" class="btn">전달완료</a>
+	                     </div>
+	                  </div>
+	               </div>
+	            </li>   
+	         </c:forEach>
+	         
          </ul>
    </div>   
 <!-- **************메시지목록************* -->

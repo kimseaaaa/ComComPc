@@ -34,9 +34,7 @@ public interface ClientMapper {
 	//로그인
 	public ClientDTO clientLogin(ClientDTO cldto);
 	
-	//로그아웃시 남은 시간 저장
-	public int mytimeUpdate(ClientDTO cldto);
-	
-
+	//총 음식금액수정
+	public int clFPUpdate(ClientDTO cldto);
 	
 }

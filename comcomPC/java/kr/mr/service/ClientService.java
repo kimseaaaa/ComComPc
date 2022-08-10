@@ -31,12 +31,8 @@ public interface ClientService {
 	//로그인
 	public ClientDTO clientLogin(ClientDTO cldto);
 	
-	
 	//시간으로 봐꿔주기~
 	public String format00(int rtime);
-
-	//로그아웃시 남은 시간 저장
-	public int mytimeUpdate(ClientDTO cldto);
-
 	
 }
+

@@ -1,6 +1,5 @@
 package kr.mr.mapper;
 
-import java.util.Date;
 
 import kr.mr.model.ClientVisitDTO;
 
