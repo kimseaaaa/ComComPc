@@ -31,5 +31,13 @@ public interface ClientService {
 	//로그인
 	public ClientDTO clientLogin(ClientDTO cldto);
 	
+	//난수좌석 함수
+	public int randomseat(ClientDTO cldto);
+	
+	
+	// 로그아웃
+	public int clientLogout(ClientDTO cldto);
+	public int clientLogout2(ClientDTO cldto);	
+
 }
 

@@ -6,7 +6,7 @@
     <div class="userName"><p>관리자 님</p></div>
   <a class="home" href="adminDashboard.do"><i class="fa fa-home" aria-hidden="true"></i></a><br>
 </div>
-<div class="time">33/70</div>
+<div class="time"><span class="seatcnt"></span>/70</div>
 <div class="btnbox">
   <a href="adminLogout.do" class="btn">로그아웃</a>
 </div>
@@ -53,6 +53,25 @@
 </div>
 
 </div>
+
 <script src="${ctx}/js/main.js"></script>
+   <script type="text/javascript">
+   $(document).ready(function(){
+      $.ajax({
+            url: "<c:url value='/ajaxSeatCnt.do'/>",
+            type: "GET",
+            success:function (data) {
+               $(".seatcnt").text(data);
+            },
+            error: function () {
+               alert("에러!!!!!!!!!");
+            }
+        });
+      
+   });
+      setTimeout(function(){
+      location.reload();
+   },60000);
+   </script>
 </body>
 </html>

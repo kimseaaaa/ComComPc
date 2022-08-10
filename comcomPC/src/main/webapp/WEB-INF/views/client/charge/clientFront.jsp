@@ -14,11 +14,14 @@ $(document).ready(function(){
 		alert("${msg}");
 	}	  
 	<c:remove var="msg" scope="session"/>
+	
+	<!-- 변경되는지 확인필요 --> 
+	$('.seat-num').text("${seatnum}");
 });
 </script>
 
 <div class="seat-num">
-    72
+  
 </div>
 
 <div class="login-box">

@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 </div>
 <div class="sidebar">
-  <div class="userNum">72</div>
+  <div class="userNum">${sdto.seatnum}</div>
   <div class="info">
-    <div class="userName"><p>김세아 님</p></div>
-  <a class="home" href="#"><i class="fa fa-home" aria-hidden="true"></i></a><br>
+    <div class="userName"><p>${sdto.sid}님</p></div>
+  <a class="home" href="clientMain.do"><i class="fa fa-home" aria-hidden="true"></i></a><br>
 </div>
 <div class="time">00:59</div>
 <div class="btnbox">
