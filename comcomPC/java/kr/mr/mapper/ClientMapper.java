@@ -38,8 +38,4 @@ public interface ClientMapper {
 	public int clFPUpdate(ClientDTO cldto);
 	
 	
-	// 좌석 번호 72로 넣어줌 추후 삭제 필요///
-	public int seat72(ClientDTO cldto);
-	///////////////////////////////////////
-	
 }

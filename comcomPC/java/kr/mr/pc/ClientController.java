@@ -66,12 +66,6 @@ public class ClientController {
 			cvdto.setSeatnum(clDto.getSeatnum());
 			cvservice.loginPoint(cvdto);
 			
-			///회원 로그인시 좌석번호 72넣어주기(다해)
-			//  - 주문 전달을 위해 임의로 넣어줌 (추후 삭제 필요)
-			clDto.setSeatnum(30);
-			service.seat72(clDto);
-			//////////////////////////////
-			
 			session.setAttribute("cllogdto", clDto);
 		}
 		model.addAttribute("msg",msg);
