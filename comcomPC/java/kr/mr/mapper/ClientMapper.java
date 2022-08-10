@@ -3,7 +3,6 @@ package kr.mr.mapper;
 import java.util.List;
 
 import kr.mr.model.ClientDTO;
-import kr.mr.model.GameDTO;
 
 public interface ClientMapper {
 	
@@ -34,7 +33,17 @@ public interface ClientMapper {
 	//로그인
 	public ClientDTO clientLogin(ClientDTO cldto);
 	
-	//총 음식금액수정
-	public int clFPUpdate(ClientDTO cldto);
+	//난수발생 저장
+	public int randomseat(ClientDTO cldto);
 	
+	//좌석번호가 DB에 존재하는지 확인
+	public int seatDbChk(int seatnum);
+	
+	//로그아웃
+	public int clientLogout(ClientDTO cldto);
+	public int clientLogout2(ClientDTO cldto);
+	
+	//회원 전체 아이디 조회
+	public List<String> clientIdList();
+
 }

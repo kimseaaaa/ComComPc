@@ -19,9 +19,9 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="seat-num">
+<!-- <div class="seat-num">
     72
-</div>
+</div> -->
 
 <div class="login-box">
     <h2>Login</h2>

@@ -10,6 +10,9 @@
   <div class="slide-item"><img src="${ctx}/img/003.jpg" alt="slider3"></div>
   <div class="slide-item"><img src="${ctx}/img/004.jpg" alt="slider4"></div>
 </div>
+<%
+	System.out.println(session.getAttribute("cllogdto") );
+%>
 <div class="main-card" id="top">
             <!-- <h2>B E S T</h2> -->
             <div class="wrapper">

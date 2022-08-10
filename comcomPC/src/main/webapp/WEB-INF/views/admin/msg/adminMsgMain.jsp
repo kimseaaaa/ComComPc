@@ -1,11 +1,27 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
    
 <!-- adminSide -->
 <%@ include file="../../inc/adminSideA.jsp" %>
+
+<%
+	SimpleDateFormat yyyy = new SimpleDateFormat("yyyy");         
+	SimpleDateFormat MM = new SimpleDateFormat("MM");         
+	SimpleDateFormat dd = new SimpleDateFormat("dd");         
+	Date now = new Date();        
+	String nowday = yyyy.format(now.getTime())+"-"+ MM.format(now.getTime())+"-"+ dd.format(now.getTime()) +" 00:00:00";
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	Date now0 = sdf.parse(nowday);
+%>
+<c:set var="yesterday" value="<%=now0%>" />
+
 
 <link rel="stylesheet" href="${ctx}/css/list.css">
 
@@ -15,18 +31,19 @@
   <h1>메시지</h1>
   <div>
     <div class="topbar">
-      <a href="" class="addbtn">아이디</a>
-      <a href="" class="addbtn">좌석번호</a>
+      <a href="adminChatIdList.do" class="addbtn">아이디</a>
+      <a href="adminMsgMain.do" class="addbtn">좌석번호</a>
       <div class="wrap">
-        <div class="search">
-          <input type="text" class="searchTerm" placeholder="아이디를 입력해주세요.">
-          <button type="submit" class="searchButton">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
+      	<form method="post" name="keyword" action="<c:url value='/adminChatSearch.do'/>">
+      		<div class="search">
+	          <input type="text" class="searchTerm" name="keyword" placeholder="아이디를 입력해주세요.">
+	          <button type="submit" class="searchButton">
+	            <i class="fa fa-search"></i>
+	          </button>
+	        </div>
+        </form>
       </div>
     </div> 
-
     <table class="table">
       <thead>
         <tr>
@@ -34,72 +51,46 @@
           <th>좌석번호</th>
           <th>시간</th>
           <th>내용</th>
-          <th class="dmbtn" ></th>
+          <th>처리여부</th>
+          <th class="dmbtn" >채팅방 이동</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>dahae</td>
-          <td>08</td>
-          <td>16:29</td>
-          <td>안녕하세요~</td>
-          <td class="delmodbtn">
-            <a href="" class="modbtn">보내기</a>
-            <a href="" class="delbtn">답변완료</a>
-          </td>
-        </tr>
-        <tr>
-          <td>dahae</td>
-          <td>08</td>
-          <td>16:29</td>
-          <td>안녕하세요~</td>
-          <td class="delmodbtn">
-            <a href="" class="modbtn">보내기</a>
-            <a href="" class="delbtn">답변완료</a>
-          </td>
-        </tr>
-        <tr>
-          <td>dahae</td>
-          <td>08</td>
-          <td>16:29</td>
-          <td>안녕하세요~</td>
-          <td class="delmodbtn">
-            <a href="" class="modbtn">보내기</a>
-            <a href="" class="delbtn">답변완료</a>
-          </td>
-        </tr>
-        <tr>
-          <td>dahae</td>
-          <td>08</td>
-          <td>2022-07-22 16:29</td>
-          <td>안녕하세요~</td>
-          <td class="delmodbtn">
-            <a href="" class="modbtn">보내기</a>
-            <a href="" class="delbtn">답변완료</a>
-          </td>
-        </tr>
-        <tr>
-          <td>dahae</td>
-          <td>08</td>
-          <td>2022-07-13 16:29</td>
-          <td>안녕하세요~</td>
-          <td class="delmodbtn">
-            <a href="" class="modbtn">보내기</a>
-            <a href="" class="delbtn">답변완료</a>
-          </td>
-        </tr>       
-        <tr>
-          <td>dahae</td>
-          <td>08</td>
-          <td>2022-06-25 16:29</td>
-          <td>안녕하세요~</td>
-          <td class="delmodbtn">
-            <a href="" class="modbtn">보내기</a>
-            <a href="" class="delbtn">답변완료</a>
-          </td>
-        </tr>
-        
-
+      <tbody>   
+      	<c:forEach var="list" items="${list}">
+      		<c:if test="${list.cok==0 && list.cfrom ne '관리자'}">
+      			<tr>
+      				<td><a style="font-weight: bold" href="adminClientView.do?id=${list.cfrom}">${list.cfrom}</a></td>
+		          	<td>${list.seatnum}</td>
+		          	<td><fmt:formatDate value="${list.cdate}" pattern="${list.cdate>=yesterday ? 'HH:mm' : 'yyyy-MM-dd'}"/></td>
+		          	<td>${list.ccontent}</td>
+		          	<td>안읽음</td>
+		          	<td>
+			          	<div class="delmodbtn">
+		          			<div class="mod">
+			          			<a href="adminChat.do?cto=${list.cfrom}"class="modbtn">채팅방</a>
+				         	</div>
+				         </div>
+			         </td>
+		        </tr>
+	        </c:if>
+        </c:forEach>
+        <c:forEach var="list" items="${list}">
+        	<c:if test="${list.cok==1 || list.cfrom eq '관리자'}">
+	        	<tr>	        
+		          <td><a style="font-weight: bold" href="${list.cfrom eq '관리자' ? list.cto : list.cfrom}">${list.cfrom eq '관리자' ? list.cto : list.cfrom}</a></td>
+		          <td>${list.seatnum}</td>
+		          <td><fmt:formatDate value="${list.cdate}" pattern="${list.cdate>=yesterday ? 'HH:mm' : 'yyyy-MM-dd'}"/></td>
+		          <td>${list.ccontent}</td>
+		          <td>읽음</td>
+		          <td>
+		          	<div class="delmodbtn">
+	          			<div class="mod">
+		          			<a href="adminChat.do?cto=${list.cfrom eq '관리자' ? list.cto : list.cfrom}"class="modbtn">채팅방</a>
+			         	</div>
+			         </div>
+		        </tr>
+	        </c:if>
+       	</c:forEach>
       </tbody>
     </table>
     </div>

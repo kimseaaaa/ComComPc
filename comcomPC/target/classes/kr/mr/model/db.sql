@@ -25,8 +25,20 @@ create table client(
     totpri int default 0,
     totfood int default 0,
     mytime int default 0,
-    seatnum int default 0
+    seatnum int ,
+    -- on update cascade : seat 테이블에 있는 값과 같은 결과값.
+    constraint seatnumber foreign key (seatnum) references seat(seatnum) on update cascade
 );
+-- 트리거 
+DELIMITER //
+Create trigger update_seat
+	after update
+	on client
+    for each row
+	begin
+        Update seat set sid = NEW.id where seatnum = NEW.seatnum;
+	end; //
+DELIMITER ;
 
 create table gamerank(
 	ranking int not null,
@@ -61,22 +73,24 @@ insert into seat(seatnum) values
 (51),(52),(53),(54),(55),(56),(57),(58),(59),(60),
 (61),(62),(63),(64),(65),(66),(67),(68),(69),(70);
 
-create table foodorder(
-	fodcode int auto_increment primary key,
-	fodid varchar(20) not null,
-    fodpri int not null,
-    foddate  datetime default now() not null,
-    fcode int not null,
-    fodqty int not null,
-    fodok int default 0 not null,
-    seatnum int not null,
-    fname  varchar(20) not null
+create table food(
+	fcode int auto_increment primary key,
+    fname varchar(20) not null,
+    fcat varchar(10) not null,
+    fpri int not null,
+    fimg varchar(50) not null,
+    fbest int default 0
 );
 
-create table clientvisit(
-	cvcode Int auto_increment primary key,
-	cvid Varchar(20) not null,
+create table chatting(
+	cfrom varchar(20) not null,
+    cto varchar(20) not null,
+    ccontent varchar(100) not null,
+	cdate datetime default now() not null,
 	seatnum int not null,
-	cvlogin datetime default now() not null,
-	cvlogout datetime
+    cok int default 0 not null
 );
+
+
+
+

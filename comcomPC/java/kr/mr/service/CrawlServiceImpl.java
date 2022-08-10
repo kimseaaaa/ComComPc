@@ -35,6 +35,7 @@ public class CrawlServiceImpl implements CrawlService{
 	@Override
 	public List<List> crawlList() {
 		List<List> allList= new ArrayList<List>();
+		System.out.println(grnlist());
     	if(grnlist().get(0) == null || grnlist().get(0).size()==0
     			||grnlist().get(1) == null || grnlist().get(1).size()==0) {
     		
