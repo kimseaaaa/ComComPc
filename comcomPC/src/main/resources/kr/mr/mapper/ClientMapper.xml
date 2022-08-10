@@ -55,11 +55,7 @@
     <update id="mytimeUpdate" parameterType="ClientDTO">
       update client set mytime=#{mytime} where id=#{id}
    </update>
-   
- 	<!-- 좌석 번호 임으로 넣어줌 추후 삭제 필요 -->
-    <update id="seat72" parameterType="ClientDTO">
-      update client set seatnum=#{seatnum} where id=#{id}
-   </update>
+
  	
  	
  </mapper>
