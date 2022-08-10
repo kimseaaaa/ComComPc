@@ -32,4 +32,10 @@
 	<select id="getseatInfo" parameterType="Integer" resultType="SeatDTO">
 		select * from seat where seatnum=#{seatnum}
 	</select>
+	
+	<!-- 사이드바에서 점유좌석 수  -->
+ 	<select id="ajaxSeatCnt" resultType="Integer">
+ 		select count(*) from seat where sid is not null
+ 	</select>	
+	
  </mapper>

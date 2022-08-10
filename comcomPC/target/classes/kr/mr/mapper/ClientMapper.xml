@@ -48,6 +48,29 @@
 	
 	 <!-- 로그인 -->
 	<select id="clientLogin" parameterType="ClientDTO" resultType="ClientDTO">
- 		select * from client where id=#{id} and pw =#{pw}
+ 		select id, pw, tel, birth, memo, totpri, totfood, mytime, seatnum  from client where id=#{id} and pw =#{pw}
  	</select>
+ 	
+ 	<!-- 난수 받은거 id에 등록 -->
+    <update id="randomseat" parameterType="ClientDTO">
+		update client set seatnum=#{seatnum} where id=#{id}
+	</update>
+ 	
+ 	<!-- 좌석번호가 DB에 존재하는지 확인 -->
+ 	<select id="seatDbChk" parameterType="Integer" resultType="Integer">
+ 		select (case when sid is not null then 1
+ 				     else 0 end) as flag
+ 		  from seat
+ 		 where seatnum=#{seatnum}
+ 	</select>
+ 	
+ 	<!-- 로그아웃 -->
+ 	<update id="clientLogout" parameterType="ClientDTO">
+ 		update client set seatnum = null where id=#{id}
+ 	</update>
+ 	<update id="clientLogout2" parameterType="ClientDTO">
+ 		update seat set sid = null where seatnum=#{seatnum}
+ 	</update>
+
+
  </mapper>
