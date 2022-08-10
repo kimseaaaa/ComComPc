@@ -37,8 +37,6 @@ public interface ClientService {
 
 	//로그아웃시 남은 시간 저장
 	public int mytimeUpdate(ClientDTO cldto);
-	
-   // 좌석 번호 임으로 넣어줌 추후 삭제 필요
-   public int seat72(ClientDTO cldto);
+
 	
 }
