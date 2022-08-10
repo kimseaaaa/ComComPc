@@ -65,6 +65,7 @@ public class ClientServiceImpl implements ClientService{
 		return mapper.clientLogin(cldto);
 	}
 	
+	
 	@Override
 	public String format00(int rtime) {
 		
@@ -82,11 +83,5 @@ public class ClientServiceImpl implements ClientService{
 		return format00;
 	}
 	
-	//로그아웃시 남은 시간 저장
-	@Override
-	public int mytimeUpdate(ClientDTO cldto) {
-		return mapper.mytimeUpdate(cldto);
-	}
-
 	
 }
