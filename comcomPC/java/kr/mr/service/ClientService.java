@@ -31,13 +31,14 @@ public interface ClientService {
 	//로그인
 	public ClientDTO clientLogin(ClientDTO cldto);
 	
-	//난수좌석 함수
-	public int randomseat(ClientDTO cldto);
 	
-	
-	// 로그아웃
-	public int clientLogout(ClientDTO cldto);
-	public int clientLogout2(ClientDTO cldto);	
+	//시간으로 봐꿔주기~
+	public String format00(int rtime);
 
+	//로그아웃시 남은 시간 저장
+	public int mytimeUpdate(ClientDTO cldto);
+	
+   // 좌석 번호 임으로 넣어줌 추후 삭제 필요
+   public int seat72(ClientDTO cldto);
+	
 }
-

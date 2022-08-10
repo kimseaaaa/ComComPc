@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.mr.model.SeatDTO;
 import kr.mr.service.SeatService;
@@ -41,14 +40,6 @@ public class SeatController {
 			Model model) throws IOException{
 		service.fixseatOk(sdto);
 		return "redirect:/adminSeat.do";
-	}
-	
-	// 사이드바에서 점유좌석 수 
-	@RequestMapping("/ajaxSeatCnt.do")
-	@ResponseBody
-	public String ajaxSeatCnt() {
-      String cnt =String.valueOf(service.ajaxSeatCnt());
-      return cnt;
 	}
 
 }

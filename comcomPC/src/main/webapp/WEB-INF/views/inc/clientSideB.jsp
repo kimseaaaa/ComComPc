@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+
 </div>
 <div class="sidebar">
-  <div class="userNum">${sdto.seatnum}</div>
+  <div class="userNum">72</div>
   <div class="info">
-    <div class="userName"><p>${sdto.sid}님</p></div>
-  <a class="home" href="clientMain.do"><i class="fa fa-home" aria-hidden="true"></i></a><br>
+
+<%	
+	String id = (String)session.getAttribute("id");
+%> 
+    <div class="userName" ><p><%=id%> 님</p></div>
+  <a class="home" onclick="timezeroOk()"><i class="fa fa-home" aria-hidden="true"></i></a><br>
 </div>
-<div class="time">00:59</div>
+<div class="time">${timefront}</div>
 <div class="btnbox">
   <a href="clientLogout.do" class="btn">로그아웃</a>
   <a href="clientCharge.do" class="btn">충전하기</a>
@@ -37,5 +43,51 @@
 </div>
 </div>
 <script src="${ctx}/js/main.js"></script>
+ <script type="text/javascript">
+
+	function timezeroOk() {
+		
+		//var time = document.getElementById("time").value;
+		var time = '${timefront}';
+		
+		//alert("[clientSideB.jsp][timezeroOk()] time : " + time);
+		
+		if(time == 0 || time == null){
+			
+			alert("잔여시간이 없습니다. 충전해 주세요.");
+			location.href = "clientCharge.do";
+		} else {
+			
+			location.href = "clientMain.do";
+		}
+	};
+	
+	$(document).ready(function(){
+		$.ajax({
+		      url: "<c:url value='/ajaxRemainingTime.do'/>",
+		      type: "GET",
+		      success:function (data) {
+		    	  $(".time").text(data);
+		      },
+		      error: function () {
+		         alert("에러!!!!!!!!!");
+		      }
+		  });
+	});
+	
+	
+	setInterval(function(){
+		$.ajax({
+		      url: "<c:url value='/ajaxRemainingTime.do'/>",
+		      type: "GET",
+		      success:function (data) {
+		    	  $(".time").text(data);
+		      },
+		      error: function () {
+		         alert("에러!!!!!!!!!");
+		      }
+		  });
+		},60000);
+</script>
 </body>
 </html>

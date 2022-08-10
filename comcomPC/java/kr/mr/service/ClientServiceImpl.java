@@ -1,7 +1,5 @@
 package kr.mr.service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.mr.mapper.ClientMapper;
 import kr.mr.model.ClientDTO;
+import kr.mr.model.GameDTO;
 
 @Service
 public class ClientServiceImpl implements ClientService{
@@ -65,40 +64,34 @@ public class ClientServiceImpl implements ClientService{
 	public ClientDTO clientLogin(ClientDTO cldto) {
 		return mapper.clientLogin(cldto);
 	}
-	//난수좌석 함수
-	public int randomseat(ClientDTO cldto) {
-		
-		int num = 0;
-		
-		while(true) {
-			num = (int) ((Math.random()*70)+1);
-			if(mapper.seatDbChk(num) == 0) break;
-		}
 	
-		System.out.println("numttt : " + num);		
-		
-		// 난수 DB 충돌 시 어떻게 할지 생각해보기!
-		// 좌석번호가 DB에 존재하는지 확인하는 sql 
-		// return 1, 0 
-		// if( 00 == 1) 난수발생 로직 실행
-		// RETURN 0 
-		//sql 호출 , 00 고객이 00 자리를 점유 
-
-		cldto.setSeatnum(num); // 좌석 난수 세팅
-		
-		return mapper.randomseat(cldto);
-	}
-
-	// 로그아웃
 	@Override
-	public int clientLogout(ClientDTO cldto) {
-		return mapper.clientLogout(cldto);
-	}
-	@Override
-	public int clientLogout2(ClientDTO cldto) {
-		return mapper.clientLogout2(cldto);
-	}	
-
-
-}		
+	public String format00(int rtime) {
 		
+		String format00;
+		   
+		int hh = rtime / 60;
+		int mm  = rtime % 60;
+		   
+		if(hh<10) format00="0"+hh;
+		else format00=String.valueOf(hh);
+		   
+		if(mm<10) format00+=":0"+mm;
+		else format00+=":"+mm;
+		   
+		return format00;
+	}
+	
+	//로그아웃시 남은 시간 저장
+	@Override
+	public int mytimeUpdate(ClientDTO cldto) {
+		return mapper.mytimeUpdate(cldto);
+	}
+	
+	   // 좌석 번호 임으로 넣어줌 추후 삭제 필요
+	   @Override
+	   public int seat72(ClientDTO cldto) {
+	      return mapper.seat72(cldto);
+	   }
+	
+}

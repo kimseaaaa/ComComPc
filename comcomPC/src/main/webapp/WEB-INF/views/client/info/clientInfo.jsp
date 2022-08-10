@@ -7,7 +7,7 @@
 <%@ include file="../../inc/clientSideA.jsp" %>
 <!-- 자바스크립트 파일 불러오기 -->
 <script type="text/javascript" src="${ctx}/js/valid.js" charset="utf-8"></script>
-
+</script>
 <div class="wrapper">
     <div class="title">
       My Page

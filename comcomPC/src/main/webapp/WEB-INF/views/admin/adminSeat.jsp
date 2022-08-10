@@ -18,14 +18,13 @@
             	<li class="seat occupy">
 				    <div class="top">
 				        <div class="seatnum">${sdto.seatnum}</div>
-				        <%-- <div class="name" >${sdto.sid}</div> --%>
-				        <a href="adminClientInfo.do" class="name" >${sdto.sid}</a>
+				        <div class="name" >${sdto.sid}</div>
 				    </div>
 				
 				    <div class="mid">08 : 12</div>
 				    <div class="bottom">
-				        <a href="adminClientInfo.do"><i class="fas fa-user"></i></a>&nbsp;&nbsp;
-				        <a href="adminChat.do"><i class="fas fa-comment-alt"></i></a>
+				        <a href=""><i class="fas fa-user"></i></a>&nbsp;&nbsp;
+				        <a href=""><i class="fas fa-comment-alt"></i></a>
 				    </div>
 				</li>
            	</c:when>

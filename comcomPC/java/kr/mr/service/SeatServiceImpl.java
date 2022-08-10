@@ -37,10 +37,4 @@ public class SeatServiceImpl implements SeatService {
 	public int updateseat(SeatDTO sdto) {
 		return mapper.seatupdate(sdto);
 	}
-	// 사이드바에서 점유좌석 수 
-	@Override
-	public int ajaxSeatCnt() {
-
-		return mapper.ajaxSeatCnt();
-	}
 }

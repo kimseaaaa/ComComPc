@@ -25,20 +25,8 @@ create table client(
     totpri int default 0,
     totfood int default 0,
     mytime int default 0,
-    seatnum int ,
-    -- on update cascade : seat 테이블에 있는 값과 같은 결과값.
-    constraint seatnumber foreign key (seatnum) references seat(seatnum) on update cascade
+    seatnum int default 0
 );
--- 트리거 
-DELIMITER //
-Create trigger update_seat
-	after update
-	on client
-    for each row
-	begin
-        Update seat set sid = NEW.id where seatnum = NEW.seatnum;
-	end; //
-DELIMITER ;
 
 create table gamerank(
 	ranking int not null,
