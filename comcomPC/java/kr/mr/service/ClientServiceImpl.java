@@ -65,6 +65,13 @@ public class ClientServiceImpl implements ClientService{
 	public ClientDTO clientLogin(ClientDTO cldto) {
 		return mapper.clientLogin(cldto);
 	}
+	
+	//회원 전체 아이디 조회
+	@Override
+	public List<String> clientIdList() {
+		return mapper.clientIdList();
+	}
+	
 	//난수좌석 함수
 	public int randomseat(ClientDTO cldto) {
 		

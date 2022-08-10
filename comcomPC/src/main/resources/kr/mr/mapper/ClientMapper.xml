@@ -64,6 +64,11 @@
  		 where seatnum=#{seatnum}
  	</select>
  	
+ 	<!-- 전체 아이디 리스트 -->
+ 	<select id="clientIdList" resultType="String">
+ 		select id from client
+ 	</select>
+ 	
  	<!-- 로그아웃 -->
  	<update id="clientLogout" parameterType="ClientDTO">
  		update client set seatnum = null where id=#{id}

@@ -1,6 +1,8 @@
 package kr.mr.pc;
 
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.mr.model.AdminDTO;
+import kr.mr.model.ChatDTO;
 import kr.mr.service.AdminService;
+import kr.mr.service.ChatService;
 import kr.mr.service.CrawlService;
 
 @Controller
@@ -23,6 +27,9 @@ public class AdminController {
 	
 	@Autowired
 	private CrawlService crawlservice;
+	
+	@Autowired 
+	private ChatService chatservice;
 
 	@RequestMapping("/adminSetting.do")
 	public String adminSetting() {
@@ -40,7 +47,36 @@ public class AdminController {
 		model.addAttribute("gamerank", gamelist.get(1));
 		////////////////////////
 		
+		// ----- 메세지 목록 ----- //
+		HashMap<String, Integer> msgMap = new HashMap<String, Integer>();
 		
+		List<Map<String, Object>> result = chatservice.msgDupl();System.out.println(result);
+		
+		for(Map<String, Object> map : result){
+			int cnt = 0;
+			String id = null;
+			
+			Iterator<String> keys = map.keySet().iterator();
+			while(keys.hasNext()) {
+				String key = keys.next();
+				if(key.equals("COUNT(cfrom)")){
+					cnt= Integer.parseInt(map.get(key).toString());
+				}
+				else if(key.equals("cfrom")) {
+					id = (String)map.get(key);
+				}
+			}
+			/* System.out.println("ID: "+id+", 값: "+cnt); */
+			msgMap.put(id, cnt);
+		}
+		
+		model.addAttribute("msgmap", msgMap);
+		/* System.out.println(msgMap); */
+		
+		//최신메시지 조회
+		List<ChatDTO> latestList = chatservice.latestList();
+		model.addAttribute("latestMsg", latestList);
+
 		return "admin/adminDashboard";
 	}
 	

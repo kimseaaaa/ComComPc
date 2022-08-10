@@ -24,7 +24,6 @@ public class ClientController {
 	@Autowired
 	private ClientService service;
 
-	
 	// 회원전체리스트
 	@RequestMapping("/adminClientList.do")
 	public String clientAll(Model model) {
@@ -35,8 +34,6 @@ public class ClientController {
 		
 		return "admin/member/adminClientList";
 	}
-
-	
 	
 	@RequestMapping("/clientLogin.do")
 	public String clientLogin() {
@@ -215,12 +212,6 @@ public class ClientController {
 		return "admin/member/adminClientInfo";
 	}   
 	
-	// 좌석에서 메세지로
-	@RequestMapping("/adminChat.do")
-	public String adminChat() {
-		return "admin/msg/adminChat";
-	}
-	
     // 회원 로그아웃
 	@RequestMapping("/clientLogout.do")
 	public String clientLogout(HttpSession session) {
@@ -230,12 +221,6 @@ public class ClientController {
 		session.invalidate();
 		return "client/info/clientLogin";
 	}
-
-	
-	
-
-
-
 }
 
 

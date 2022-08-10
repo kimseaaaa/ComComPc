@@ -8,8 +8,10 @@ import kr.mr.model.GameDTO;
 public interface ClientService {
 	//전체 리스트 
 	public List<ClientDTO> clgetList();
+	
 	//등록
 	public int clinsert(ClientDTO cldto);
+	
 	//삭제
 	public int cldelete(String id);
 	
@@ -34,10 +36,12 @@ public interface ClientService {
 	//난수좌석 함수
 	public int randomseat(ClientDTO cldto);
 	
-	
 	// 로그아웃
 	public int clientLogout(ClientDTO cldto);
 	public int clientLogout2(ClientDTO cldto);	
+	
+	//회원 전체 아이디 조회
+	public List<String> clientIdList();
 
 }
 

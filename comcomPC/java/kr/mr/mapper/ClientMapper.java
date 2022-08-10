@@ -41,6 +41,9 @@ public interface ClientMapper {
 	
 	//로그아웃
 	public int clientLogout(ClientDTO cldto);
-	public int clientLogout2(ClientDTO cldto);	
+	public int clientLogout2(ClientDTO cldto);
+	
+	//회원 전체 아이디 조회
+	public List<String> clientIdList();
 
 }

@@ -72,3 +72,25 @@ insert into seat(seatnum) values
 (41),(42),(43),(44),(45),(46),(47),(48),(49),(50),
 (51),(52),(53),(54),(55),(56),(57),(58),(59),(60),
 (61),(62),(63),(64),(65),(66),(67),(68),(69),(70);
+
+create table food(
+	fcode int auto_increment primary key,
+    fname varchar(20) not null,
+    fcat varchar(10) not null,
+    fpri int not null,
+    fimg varchar(50) not null,
+    fbest int default 0
+);
+
+create table chatting(
+	cfrom varchar(20) not null,
+    cto varchar(20) not null,
+    ccontent varchar(100) not null,
+	cdate datetime default now() not null,
+	seatnum int not null,
+    cok int default 0 not null
+);
+
+
+
+

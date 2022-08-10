@@ -20,4 +20,7 @@ public interface SeatService {
 	
 	// 사이드바에서 점유좌석 수 
 	public int ajaxSeatCnt();
+	
+	//점유된 좌석 정보 목록
+	public List<SeatDTO> occupyList();
 }
