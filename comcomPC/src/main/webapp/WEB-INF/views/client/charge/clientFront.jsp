@@ -5,41 +5,39 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-
 <link rel="stylesheet" href="${ctx}/css/clientLogin.css">
-
+ 
 <script type="text/javascript">
 $(document).ready(function(){
 	if(${msg != null}){
 		alert("${msg}");
 	}	  
 	<c:remove var="msg" scope="session"/>
-	
-	<!-- 변경되는지 확인필요 --> 
-	$('.seat-num').text("${seatnum}");
 });
+
 </script>
 
 <div class="seat-num">
-  
+    72
 </div>
 
 <div class="login-box">
     <form>
       <div class="user-box">
-        <p> 남은 금액</p>
-        <span> 100,000 원</span>
+
+        <p> 남은 시간</p>
+        <span>${timefront}</span>
       </div>
     
       <div class="user-btn">
-        <a href="client_charge.html">
+        <a href="clientPreCharge.do">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
             충전하기
         </a>
-        <a href="clientMain.do">
+        <a onclick="timezeroOk()">
             <span></span>
             <span></span>
             <span></span>
@@ -49,3 +47,25 @@ $(document).ready(function(){
     </div>
     </form>
   </div>
+  
+<script type="text/javascript">
+function timezeroOk() {
+	
+	//var time = document.getElementById("time").value;
+	var time = '${timefront}';
+	
+	//alert("[clientSideB.jsp][timezeroOk()] time : " + time);
+	
+	if(time == "00:00"){
+		
+		alert("잔여시간이 없습니다. 충전해 주세요.");
+		location.href = "clientPreCharge.do";
+	} else {
+		
+		location.href = "clientStart.do";
+	}
+};
+</script>
+  
+
+ 

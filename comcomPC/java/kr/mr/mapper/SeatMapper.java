@@ -18,7 +18,4 @@ public interface SeatMapper {
 	
 	//해당 좌석번호 정보
 	public SeatDTO getseatInfo(int seatnum);
-	
-	// 사이드바에서 점유좌석 수 
-	public int ajaxSeatCnt();
 }
