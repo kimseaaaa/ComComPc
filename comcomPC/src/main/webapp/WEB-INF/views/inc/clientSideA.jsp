@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%
+	System.out.println(session.getAttribute("cllogdto") );
 	if(session.getAttribute("cllogdto") == null){
 		response.sendRedirect("clientLogin.do");
 		session.setAttribute("msg", "로그인이 필요합니다.");

@@ -3,7 +3,7 @@ package kr.mr.pc;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,8 +16,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.mr.model.FoodDTO;
-import kr.mr.model.FoodOrderDTO;
-import kr.mr.service.FoodOrderService;
 import kr.mr.service.FoodService;
 
 @Controller
@@ -25,9 +23,6 @@ public class FoodController {
 	
 	@Autowired
 	private FoodService service;
-	
-	@Autowired
-	private FoodOrderService foservice;
 	
 	//메뉴 전체 리스트 조회
 	@RequestMapping("/adminFoodList.do")
@@ -220,18 +215,11 @@ public class FoodController {
 	}
 	
 	//메뉴 메인 페이지 리스트
-		@RequestMapping("/clientFoodMain.do")
-		public String FoodMain(Model model,RedirectAttributes redirect,String msg) {
-			List<FoodDTO> list = service.FoodList();
-			model.addAttribute("MenuList",list);
-			Map<Integer,FoodOrderDTO> focart=foservice.getfocart();
-			if(focart!=null) {
-				model.addAttribute("focart",focart);
-			}
-			
-			model.addAttribute("msg", msg);
-			
-			return "client/food/clientFoodMain";
-		}
-
+	@RequestMapping("/clientFoodMain.do")
+	public String adminSeat(Model model) {
+		List<FoodDTO> list = service.FoodList();
+		model.addAttribute("MenuList",list);
+		
+		return "client/clientFoodMain";
+	}
 }

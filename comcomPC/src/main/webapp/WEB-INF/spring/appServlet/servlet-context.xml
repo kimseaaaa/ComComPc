@@ -21,7 +21,6 @@
 	<resources mapping="/gameimg/**" location="file:///C:/study-spring/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/comcomPC/gameimg/"  />
 	<resources mapping="/FoodImg/**" location="file:///C:/study-spring/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/comcomPC/FoodImg/"  />
 	
-	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />

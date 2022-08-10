@@ -1,8 +1,6 @@
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
+    
      
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
@@ -20,12 +18,12 @@
   <div>
     <div class="topbar">
       <div class="wrap">
-        <form class="search" action="adminOrderSearch.do">
-          <input type="text" class="searchTerm" name="ordersearch" placeholder="좌석번호 또는 아이디를 입력하세요">
+        <div class="search">
+          <input type="text" class="searchTerm" placeholder="What are you looking for?">
           <button type="submit" class="searchButton">
             <i class="fa fa-search"></i>
           </button>
-        </form>
+        </div>
       </div>
     </div> 
 
@@ -41,42 +39,65 @@
         </tr>
       </thead>
       <tbody>
-        <%
-        SimpleDateFormat yyyy = new SimpleDateFormat("yyyy");         
-    	SimpleDateFormat MM = new SimpleDateFormat("MM");         
-    	SimpleDateFormat dd = new SimpleDateFormat("dd");   
-    	SimpleDateFormat HH = new SimpleDateFormat("hh");
-    	SimpleDateFormat mm = new SimpleDateFormat("mm");
-    	Date now = new Date();        
-    	String nowday = yyyy.format(now.getTime())+"-"+ MM.format(now.getTime())+"-"+ dd.format(now.getTime()) +" 00:00:00";
-   		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date now0 = sdf.parse(nowday);
-      %>
-      <c:set var="yesterday" value="<%=now0%>" />
-      <c:forEach var="fodto" items="${folist}">
         <tr>
-          <td>${fodto.fodid}</td>
-          <td>${fodto.seatnum}</td>
-          <td><fmt:formatDate value="${fodto.foddate}" pattern="${fodto.foddate>=yesterday ? 'HH:mm' : 'yyyy-MM-dd'}"/></td>
-          <td>${fodto.fname}</td>
-          <td>${fodto.fodqty}</td>
+          <td>dahae</td>
+          <td>30</td>
+          <td>16:09</td>
+          <td>신라면</td>
+          <td>3</td>
           <td class="delmodbtn">
-            <a href="adminOrderOk.do?l=l&fodcode=${fodto.fodcode}" class="modbtn">전달</a>
+            <a href="" class="modbtn">전달</a>
           </td>
         </tr>
-      </c:forEach>
 
-		<c:forEach var="fodto" items="${endfolist}">
-		       <tr>
-		         <td>${fodto.fodid}</td>
-		         <td>${fodto.seatnum}</td>
-		         <td><fmt:formatDate value="${fodto.foddate}" pattern="${fodto.foddate>=yesterday ? 'HH:mm' : 'yyyy-MM-dd'}"/></td>
-		         <td>${fodto.fname}</td>
-		         <td>${fodto.fodqty}</td>
-		         <td class="delmodbtn">완료 </td>
-		       </tr>
-		   </c:forEach>
+        <tr>
+          <td>dahae</td>
+          <td>30</td>
+          <td>16:09</td>
+          <td>아이스티</td>
+          <td>3</td>
+          <td class="delmodbtn">
+            <a href="" class="modbtn">전달</a>
+          </td>
+        </tr>
+        <tr>
+          <td>dahae</td>
+          <td>30</td>
+          <td>11:09</td>
+          <td>공기밥</td>
+          <td>3</td>
+          <td class="delmodbtn">
+            <a href="" class="modbtn">전달</a>
+          </td>
+        </tr>
+        <tr>
+          <td>dahae</td>
+          <td>30</td>
+          <td>3:09</td>
+          <td>진라면</td>
+          <td>3</td>
+          <td class="delmodbtn">
+            <a href="" class="modbtn">전달</a>
+          </td>
+        </tr>
 
+        <tr>
+          <td>dahae</td>
+          <td>30</td>
+          <td>2022-07-16 </td>
+          <td>신라면</td>
+          <td>3</td>
+          <td class="delmodbtn">완료 </td>
+        </tr>
+
+        <tr>
+          <td>dahae</td>
+          <td>30</td>
+          <td>2022-06-26 16:09</td>
+          <td>신라면</td>
+          <td>3</td>
+          <td class="delmodbtn">완료 </td>
+        </tr>
       </tbody>
     </table>
     </div>

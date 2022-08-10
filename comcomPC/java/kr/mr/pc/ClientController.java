@@ -1,6 +1,8 @@
 package kr.mr.pc;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,21 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import kr.mr.model.AdminDTO;
 import kr.mr.model.ClientDTO;
-import kr.mr.model.ClientVisitDTO;
 import kr.mr.service.ClientService;
-import kr.mr.service.ClientVisitService;
 
 @Controller
 public class ClientController {
 	@Autowired
 	private ClientService service;
-	
-	@Autowired
-	private ClientVisitService cvservice;
 
-	
 	// 회원전체리스트
 	@RequestMapping("/adminClientList.do")
 	public String clientAll(Model model) {
@@ -39,8 +34,6 @@ public class ClientController {
 		
 		return "admin/member/adminClientList";
 	}
-
-	
 	
 	@RequestMapping("/clientLogin.do")
 	public String clientLogin() {
@@ -50,26 +43,27 @@ public class ClientController {
 	@RequestMapping("/clientLoginOk.do")
 	public String clientLoginOk(ClientDTO cldto, Model model, HttpSession session) {
 		
-		ClientDTO clDto = service.clientLogin(cldto);
+		ClientDTO resClDto = service.clientLogin(cldto);
+
 		String viewpage = null;
 		String msg = null;
-		if(clDto==null) {
+		if(resClDto==null) {
 			viewpage = "client/info/clientLogin";
 			msg = "로그인 실패";
 		}else {
 			viewpage = "client/charge/clientFront";
 			msg = "로그인 성공";
-			
-			//로그인 시점 저장
-			ClientVisitDTO cvdto = new ClientVisitDTO(); 
-			cvdto.setCvid(clDto.getId());
-			cvdto.setSeatnum(clDto.getSeatnum());
-			cvservice.loginPoint(cvdto);
-			
-			session.setAttribute("cllogdto", clDto);
-		}
-		model.addAttribute("msg",msg);
 		
+			if(resClDto.getSeatnum() == 0){
+				// 자리 난수 함수 호출
+				service.randomseat(resClDto);
+			}
+			
+			session.setAttribute("cllogdto", resClDto);
+		}		
+		System.out.println(msg);
+		model.addAttribute("msg",msg);
+		model.addAttribute("seatnum", resClDto.getSeatnum());
 		return viewpage;
 	}
 	
@@ -77,7 +71,7 @@ public class ClientController {
 	public String clientMain() {
 		return "client/clientMain";
 	}
-	
+	// 회원가입
 	@RequestMapping("/clientJoin.do")
 	public String clientJoin() {
 		return "client/info/clientJoin";
@@ -106,7 +100,7 @@ public class ClientController {
 		return "redirect:/adminClientList.do";
 	}
 	
-	 // adminClientList에서의 수정버튼
+	// adminClientList에서의 수정버튼
    @RequestMapping("/adminClientView.do")
    public String clviewpage(String msg,String id, Model model,RedirectAttributes redirect) {
       
@@ -187,21 +181,6 @@ public class ClientController {
       
       return "redirect:/adminClientView.do";
    }
-   
-	@RequestMapping("/clientLogout.do")
-	public String clientLogout(HttpSession session) {
-		
-		//로그아웃시점 저장
-		ClientDTO cldto = (ClientDTO)session.getAttribute("cllogdto");
-		String cvcode = cvservice.logoutnullcode(cldto.getId());
-		
-		System.out.println("cvcode : "+cvcode);
-		
-		cvservice.logoutPoint(cvcode);
-		
-		session.invalidate();
-		return "client/info/clientLogin";
-	}
 	
    @RequestMapping("/clientidcheck.do")
    public String clientidchek(HttpServletRequest request,HttpServletResponse response,String id, Model model) {
@@ -227,8 +206,21 @@ public class ClientController {
       return null;
    }
 	   
+	// 좌석에서 회원정보로
+	@RequestMapping("/adminClientInfo.do")
+	public String adminClientInfo() {
+		return "admin/member/adminClientInfo";
+	}   
 	
-
+    // 회원 로그아웃
+	@RequestMapping("/clientLogout.do")
+	public String clientLogout(HttpSession session) {
+		ClientDTO cldto = (ClientDTO) session.getAttribute("cllogdto");
+		service.clientLogout(cldto);
+		service.clientLogout2(cldto);
+		session.invalidate();
+		return "client/info/clientLogin";
+	}
 }
 
 

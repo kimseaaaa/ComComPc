@@ -4,11 +4,11 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+   <title>Home</title>
 </head>
 <body>
 <h1>
-	Hello world!  
+   Hello world!  
 </h1>
 <a href="clientLogin.do">회원로그인 페이지로 가기</a>
 <br/>
