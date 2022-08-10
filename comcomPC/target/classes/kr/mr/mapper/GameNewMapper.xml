@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="kr.mr.mapper.GameNewMapper">
+ 
+ 	<!-- 전체 리스트  -->
+ 	<select id="getgamenewList" resultType="GameNewDTO">
+ 		select * from gamenew
+ 	</select>
+ 	
+ 	<!-- 등록  -->
+ 	<insert id="gamenewinsert" parameterType="GameNewDTO">
+	 	insert into gamenew(gnrelease, gnname, gnshare, gnupdate)
+	 	values(#{gnrelease}, #{gnname}, #{gnshare}, NOW())
+ 	</insert>
+ 	
+ 	<!-- 전체 삭제 -->
+ 	<delete id="gamenewdelete">
+ 		Truncate gamenew
+ 	</delete>  
+ 	
+ 	
+ </mapper>

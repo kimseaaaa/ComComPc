@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="kr.mr.mapper.FoodMapper">
+ 
+	<!-- 메뉴 전체 리스트 -->
+	<select id="FoodList" resultType="FoodDTO">
+		select * from food
+	</select>
+	
+	<!-- 메뉴 추가 -->
+	<insert id="FoodAdd" parameterType="FoodDTO">
+		insert into food(fname,fcat,fpri,fimg)
+		values(#{fname},#{fcat},#{fpri},#{fimg})
+	</insert>
+	
+	<!-- 메뉴 삭제 -->
+	<delete id="FoodDelete" parameterType="Integer"> 
+		delete from food where fcode=#{fcode}
+	</delete>
+	
+	<!-- 메뉴 정보 조회 -->
+ 	<select id="FoodView" parameterType="Integer" resultType="FoodDTO">
+ 		select * from food where fcode=#{fcode}
+ 	</select>
+ 	
+ 	<!-- 메뉴 정보 수정 -->
+ 	<update id="FoodUpdate" parameterType="FoodDTO">
+ 		update food set fname=#{fname},fpri=#{fpri},fcat=#{fcat},fimg=#{fimg},fbest=#{fbest} where fcode=#{fcode}
+ 	</update>
+ 	
+ 	<!-- 메뉴 Best 리스트 -->
+ 	<select id="FoodBestList" resultType="FoodDTO">
+ 		select * from food where fbest=1
+ 	</select>
+ 	
+ 	<!-- 메뉴 검색 결과 -->
+    <select id="FoodSearchList" parameterType="String" resultType="FoodDTO">
+       select * from food where fname like concat('%',#{keyword},'%')
+    </select>
+ 
+ </mapper>
